@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using DatingApp.API.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace DatingApp.API
 {
@@ -31,6 +32,8 @@ namespace DatingApp.API
            
           services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         services.AddCors();
+        services.AddScoped<IAuthRepository,AuthRepository>();
+     
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,7 +48,7 @@ namespace DatingApp.API
 
          //  app.UseRouting();
 
-         //   app.UseAuthorization();
+        // app.UseAuthorization();
          app.UseCors(x=>x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
          app.UseMvc();
         
